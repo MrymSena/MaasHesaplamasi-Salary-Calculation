@@ -1,5 +1,5 @@
 # MaasHesaplamasi-Salary-Calculation
-Maas Hesaplama (Recursive Metod)
+Maas Hesaplama (Recursive Method)
 
 Problem:
 Maaş Hesaplaması
