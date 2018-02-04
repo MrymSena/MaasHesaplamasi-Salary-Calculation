@@ -6,51 +6,51 @@ public class MaasHesaplamasi {
 	
 //“X liralýk net maaþ için ne kadarlýk brüt maaþ gerekir?
 	
-	double Kesintiler;
-	double Vergiler;
-	double NetMaas;
-	double BrütMaas;
+	double kesintiler;
+	double vergiler;
+	double netMaas;
+	double brütMaas;
 	long counter=0;
 	
-	ArrayList<Double>NetMaaslar= new ArrayList<>();
+	ArrayList<Double>netMaaslar= new ArrayList<>();
 	
 	double[][] netMaasTahminAralýðý= new double[1][2];
 	
-	public double NetMaasHesapla(double brütMaas){
-		Kesintiler=brütMaas*0.1;
-		Vergiler=brütMaas*0.2;
-		NetMaas=brütMaas-(Kesintiler+Vergiler);
-		return  NetMaas;
+	public double netMaasHesapla(double brütMaas){
+		kesintiler=brütMaas*0.1;
+		vergiler=brütMaas*0.2;
+		netMaas=brütMaas-(kesintiler+vergiler);
+		return  netMaas;
 	}
 	
-	public double BrütMaasHesapla(double netMaas){
+	public double brütMaasHesapla(double netMaas){
 		counter++;
-		NetMaaslar.add(netMaas);
+		netMaaslar.add(netMaas);
 		double aralýk=netMaas-netMaas*0.1;
 		
 		if(counter==1){
 		
-			netMaasTahminAralýðý[0][0]=NetMaaslar.get(0);
+			netMaasTahminAralýðý[0][0]=netMaaslar.get(0);
 			netMaasTahminAralýðý[0][1]=aralýk;
 		}
-		BrütMaas=netMaas*(1.5);
-		double tahminNetMaas=NetMaasHesapla(BrütMaas);
+		brütMaas=netMaas*(1.5);
+		double tahminNetMaas=netMaasHesapla(brütMaas);
 		
-		if(tahminNetMaas>NetMaaslar.get(0)){
+		if(tahminNetMaas>netMaaslar.get(0)){
 			
 			if(counter>1){
-				netMaasTahminAralýðý[0][0]=NetMaaslar.get((int)counter-1);
+				netMaasTahminAralýðý[0][0]=netMaaslar.get((int)counter-1);
 			}
 			netMaas=ThreadLocalRandom.current().nextDouble(netMaasTahminAralýðý[0][1],netMaasTahminAralýðý[0][0]);
-			return BrütMaasHesapla(netMaas);
+			return brütMaasHesapla(netMaas);
 			
-		}else if(tahminNetMaas<NetMaaslar.get(0)){
-				netMaasTahminAralýðý[0][1]=NetMaaslar.get((int)counter-1);
+		}else if(tahminNetMaas<netMaaslar.get(0)){
+				netMaasTahminAralýðý[0][1]=netMaaslar.get((int)counter-1);
 				netMaas=ThreadLocalRandom.current().nextDouble(netMaasTahminAralýðý[0][1],netMaasTahminAralýðý[0][0]);
-				return BrütMaasHesapla(netMaas);
+				return brütMaasHesapla(netMaas);
 				}
 		
-		return BrütMaas;
+		return brütMaas;
 	
 	}
 	
@@ -58,7 +58,7 @@ public class MaasHesaplamasi {
 		
 		MaasHesaplamasi maasHesaplamasi = new MaasHesaplamasi();
 		
-		System.out.println(maasHesaplamasi.BrütMaasHesapla(5.000));
+		System.out.println(maasHesaplamasi.brütMaasHesapla(5.000));
 	
 	
 	}
